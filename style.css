@@ -1,76 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,200&family=Poppins:wght@300&display=swap');
 
-*{
+* {
     padding: 0%;
     margin: 0%;
 }
 
-body
-{
+body {
     background-color: black;
 }
 
-h1
-{
+h1 {
     font-family: 'DM Sans', sans-serif;
     padding: 10px;
     color: white;
     letter-spacing: 2px;
+    margin-inline: auto;
 }
 
-.container
-{
+.container {
     padding: 10px;
     width: 98%;
+    margin-inline: auto;
+    text-align: center;
 }
 
-form
-{
+form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    width: 90%;
+    margin-inline: auto;
 }
 
-form>input
-{
+form>input {
     background-color: transparent;
     border: 2px solid white;
     padding: 5px;
     border-radius: 5px;
     color: white;
+    margin-top: 20px;
 }
 
-form>button
-{
+form>button {
     grid-row-start: 3;
     grid-column-start: 1;
     padding: 10px;
     border-radius: 5px;
     transition: 0.5s;
+    margin-top: 15px;
 }
 
-#editBtn
-{
+#editBtn {
     display: none;
-    
+
 
 }
 
-form>button:hover
-{
+form>button:hover {
     transform: scale(1.05);
 }
 
 
 
-form > * {
-    
-    height: 50px;
-  }
+form>* {
 
-#search
-{
-    width: 99%;
+    height: 50px;
+}
+
+#search {
+    width: 90%;
     margin-top: 35px;
     background-color: transparent;
     border: 2px solid white;
@@ -78,33 +76,56 @@ form > * {
     border-radius: 5px;
     color: white;
     height: 50px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.my-table
-{
-   
-    margin-top: 25px;
+.my-table {
+
+    margin-top: 30px;
     color: white;
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
-    
+    margin-inline: auto;
+
 }
 
-th,td
-{
+th,
+td {
     border: 1px solid white;
     padding: 10px;
     text-align: center;
 }
 
-td:nth-child(6){
+td:nth-child(6) {
     display: flex;
     justify-content: space-between;
     align-items: center;
- }
- 
- .edit-buttons{
-     display: flex;
-     gap: 8px;
- }
+}
 
+.edit-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+@media (max-width: 750px) {
+
+    form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 90%;
+        margin-inline: auto;
+    }
+
+    form>button {
+        grid-row-start: 4;
+        grid-column-start: 1;
+        padding: 10px;
+        border-radius: 5px;
+        transition: 0.5s;
+        margin-top: 15px;
+    }
+}
