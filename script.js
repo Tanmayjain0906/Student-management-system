@@ -36,7 +36,7 @@ button.addEventListener('submit', (e) => {
 
     td5.innerText = gpa;
 
-    td6.innerHTML = `<div>${degree}</div> <div class="edit-buttons"><button class="edit"  onclick="editBtn(${idNo})">E</button><button class="delete"  onclick="deleteBtn(${idNo})">D</button></div>`;
+    td6.innerHTML = `<div>${degree}</div> <div class="edit-buttons"><button class="edit"  onclick="editBtn(${idNo})"><i class="fa-solid fa-pen-to-square" style="color: #0c4cbb;"></i></button><button class="delete"  onclick="deleteBtn(${idNo})"><i class="fa-solid fa-trash" style="color: #0c4cbb;"></i></button></div>`;
 
     tr.append(td1, td2, td3, td4, td5, td6);
     tbody.appendChild(tr);
