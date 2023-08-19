@@ -1,12 +1,15 @@
 
 let button = document.getElementsByClassName("student-detail")[0];
-
+let addButton = document.getElementById("editBtn");
 let tbody = document.getElementsByClassName("my-tbody")[0];
 let idNo = 1;
 button.addEventListener('submit', (e) => {
     e.preventDefault();
 
-
+    
+   if(addButton.style.display === "")
+   {
+    console.log("1");
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let gpa = document.getElementById("gpa").value;
@@ -33,7 +36,7 @@ button.addEventListener('submit', (e) => {
 
     td5.innerText = gpa;
 
-    td6.innerHTML = `${degree} <div class="edit-buttons"><button class="edit"  onclick="editBtn(${idNo})">E</button><button class="delete"  onclick="deleteBtn(${idNo})">D</button></div>`;
+    td6.innerHTML = `<div>${degree}</div> <div class="edit-buttons"><button class="edit"  onclick="editBtn(${idNo})">E</button><button class="delete"  onclick="deleteBtn(${idNo})">D</button></div>`;
 
     tr.append(td1, td2, td3, td4, td5, td6);
     tbody.appendChild(tr);
@@ -43,13 +46,25 @@ button.addEventListener('submit', (e) => {
     document.getElementById("gpa").value = "";
     document.getElementById("age").value = "";
     document.getElementById("degree").value = "";
+   }
+   else
+   {
+    addButton.style.display = "";
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("gpa").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("degree").value = "";
+   }
+   
+    
 })
 
 
 function search() {
     let searchInput = document.getElementById("search").value.toUpperCase();
 
-    
+
 
     let tr = tbody.getElementsByTagName("tr");
 
@@ -75,19 +90,54 @@ function search() {
 }
 
 
-function deleteBtn(data)
-{
-    let removeId = (data-1).toString();
-    console.log(typeof removeId);
+function deleteBtn(data) {
+
+    let removeId = (data - 1).toString();
+    let newId = data - 1;
+    let index = -1;
+
     let tr = tbody.getElementsByTagName("tr");
-    console.log(typeof tr[0].className);
-    for(let i=0;i<tr.length;i++)
-    {
+
+    for (let i = 0; i < tr.length; i++) {
         let trId = tr[i].className;
 
-        if(removeId === trId)
-        {
+        if (removeId === trId) {
             tbody.removeChild(tr[i]);
+            index = i;
         }
     }
+
+}
+
+
+function editBtn(data) {
+    let changeId = (data - 1).toString();
+
+    addButton.style.display = "block";
+    
+    let index = -1;
+    let tr = tbody.getElementsByTagName("tr");
+
+    for (let i = 0; i < tr.length; i++) {
+        let trId = tr[i].className;
+
+        if (changeId === trId) {
+            document.getElementById("name").value = tr[i].getElementsByTagName("td")[1].innerText;
+            document.getElementById("email").value = tr[i].getElementsByTagName("td")[2].innerText;
+            document.getElementById("age").value = tr[i].getElementsByTagName("td")[3].innerText;
+            document.getElementById("gpa").value = tr[i].getElementsByTagName("td")[4].innerText;
+            document.getElementById("degree").value = tr[i].getElementsByTagName("td")[5].getElementsByTagName("div")[0].innerText;
+            index = i;
+        }
+    }
+
+    addButton.addEventListener("click", () => {
+        console.log("2");
+        tr[index].getElementsByTagName("td")[1].innerText = document.getElementById("name").value;
+        tr[index].getElementsByTagName("td")[2].innerText = document.getElementById("email").value;
+        tr[index].getElementsByTagName("td")[3].innerText = document.getElementById("age").value;
+        tr[index].getElementsByTagName("td")[4].innerText = document.getElementById("gpa").value;
+        tr[index].getElementsByTagName("td")[5].getElementsByTagName("div")[0].innerText = document.getElementById("degree").value;
+    })
+    
 }
