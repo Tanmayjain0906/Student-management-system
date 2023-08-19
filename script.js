@@ -62,7 +62,7 @@ button.addEventListener('submit', (e) => {
 
 
 function search() {
-    let searchInput = document.getElementById("search").value.toUpperCase();
+    let searchInput = document.getElementById("search").value.toUpperCase().trim();
 
 
 
