@@ -5,7 +5,7 @@ let tbody = document.getElementsByClassName("my-tbody")[0];
 let idNo = 1;
 button.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
 
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
@@ -14,6 +14,7 @@ button.addEventListener('submit', (e) => {
     let degree = document.getElementById("degree").value;
 
     let tr = document.createElement("tr");
+    tr.className = `${idNo}`
     let td1 = document.createElement("td");
     let td2 = document.createElement("td");
     let td3 = document.createElement("td");
@@ -25,14 +26,14 @@ button.addEventListener('submit', (e) => {
     idNo++;
 
     td2.innerText = name;
- 
+
     td3.innerText = email;
 
     td4.innerText = age;
 
     td5.innerText = gpa;
 
-    td6.innerHTML = `${degree} <div class="edit-buttons"><button class="edit">E</button><button class="delete">D</button></div>`;
+    td6.innerHTML = `${degree} <div class="edit-buttons"><button class="edit"  onclick="editBtn(${idNo})">E</button><button class="delete"  onclick="deleteBtn(${idNo})">D</button></div>`;
 
     tr.append(td1, td2, td3, td4, td5, td6);
     tbody.appendChild(tr);
@@ -45,34 +46,48 @@ button.addEventListener('submit', (e) => {
 })
 
 
-function search() 
-{
-   let searchInput = document.getElementById("search").value.toUpperCase();
-   
-   let myTable = document.getElementsByClassName("my-tbody")[0];
+function search() {
+    let searchInput = document.getElementById("search").value.toUpperCase();
 
-   let tr = myTable.getElementsByTagName("tr");
-
-   for(let i=0;i<tr.length;i++)
-   {
     
 
-    let tdName = tr[i].getElementsByTagName("td")[1];
-    let tdNameText = tdName.innerText.toUpperCase();
+    let tr = tbody.getElementsByTagName("tr");
 
-    let tdEmail = tr[i].getElementsByTagName("td")[2];
-    let tdEmailText = tdEmail.innerText.toUpperCase();
+    for (let i = 0; i < tr.length; i++) {
 
-    let tdDegree = tr[i].getElementsByTagName("td")[5];
-    let tdDegreeText = tdDegree.innerText.toUpperCase();
 
-    if((tdNameText.indexOf(searchInput) > -1) || (tdEmailText.indexOf(searchInput) > -1) || (tdDegreeText.indexOf(searchInput) > -1))
-    {
-        tr[i].style.display = "";
+        let tdName = tr[i].getElementsByTagName("td")[1];
+        let tdNameText = tdName.innerText.toUpperCase();
+
+        let tdEmail = tr[i].getElementsByTagName("td")[2];
+        let tdEmailText = tdEmail.innerText.toUpperCase();
+
+        let tdDegree = tr[i].getElementsByTagName("td")[5];
+        let tdDegreeText = tdDegree.innerText.toUpperCase();
+
+        if ((tdNameText.indexOf(searchInput) > -1) || (tdEmailText.indexOf(searchInput) > -1) || (tdDegreeText.indexOf(searchInput) > -1)) {
+            tr[i].style.display = "";
+        }
+        else {
+            tr[i].style.display = "none";
+        }
     }
-    else
+}
+
+
+function deleteBtn(data)
+{
+    let removeId = (data-1).toString();
+    console.log(typeof removeId);
+    let tr = tbody.getElementsByTagName("tr");
+    console.log(typeof tr[0].className);
+    for(let i=0;i<tr.length;i++)
     {
-        tr[i].style.display = "none";
+        let trId = tr[i].className;
+
+        if(removeId === trId)
+        {
+            tbody.removeChild(tr[i]);
+        }
     }
-   }
 }
